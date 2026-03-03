@@ -1,0 +1,1 @@
+Ceci est mon projet de TFE un pimeline WGS pour bacteries basé sur Nextflow
