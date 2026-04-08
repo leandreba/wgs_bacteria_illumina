@@ -1,5 +1,4 @@
 #!/usr/bin/env nextflow
-//lsite des parametres par default si pas inscris 
 
 //définis le process à executer (equivalent à une fonction entre gros guillemets)
 process fastqc {
