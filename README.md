@@ -34,12 +34,12 @@ git clone git@github.com:leandreba/tfe.git
 Le script `./install.sh` permet de télécharger et installer les différents containers utilisés par le workflow :
 
 ```
-cd chemin_du_dossier_télécharger
+cd chemin_du_dossier_téléchargé
 ./install.sh
 ```
 
 # Utilisation
-Il faut executer le script `main.nf` avec `nextflow` et mettre un parametre `--input` correspondant au dossier avec les tous les fichiers fastq **sans sous dossiers**. Le programme détecte directememnt les fichiers pairs.
+Il faut executer le script `main.nf` avec `nextflow` et mettre un parametre `--input` correspondant au dossier avec les tous les fichiers fastq **sans sous dossiers**. Le programme détecte directement les fichiers pairs.
 
 ```
 nextflow chemin_d'instalation/main.nf --input dossier_avec_les_fasta
