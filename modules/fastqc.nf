@@ -1,31 +1,20 @@
 #!/usr/bin/env nextflow
 
+//définis le process à executer (equivalent à une fonction entre gros guillemets)
 process fastqc {
-    
+
     input:
-    path chemin
+    tuple val(id), path(reads)
     
     script:
     
     """
-    /opt/FastQC/fastqc --memory 2000 -t 8 ${chemin} 
+    fastqc --memory 2000 -t 8 '${reads[0]}' '${reads[1]}' 
     """
 
     output:
-    path '*_fastqc.html'
-    path '*_fastqc.zip'
+    tuple val(id) ,path("*_fastqc.html") , path("*_fastqc.zip") //au format tupple car sinon on doit declarer nos output 1 par 1 apres dans publish 
 }
 
-workflow {
-    main:
-    fastqc(params.input)
 
-    publish:
-    first_output = fastqc.out
-}
 
-output {
-    first_output {
-        path '.'
-    }
-}
