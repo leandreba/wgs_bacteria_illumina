@@ -1,9 +1,9 @@
 include {fastqc as fastqc_raw} from './modules/fastqc.nf'
 include {fastp} from './modules/fastp.nf'
 include {fastqc as fastqc_clean} from './modules/fastqc.nf'
+include {kraken2} from './modules/kraken2.nf'
 include {spades} from './modules/spades.nf'
 include {amrfinder} from './modules/amrfinder.nf'
-
 
 //la base de notre worklfow on y appelle nos process
 workflow {
@@ -24,6 +24,9 @@ workflow {
     //on faitun nouveau fastqc à partir de nos reads clean
     fastqc_clean(clean_reads, params.threads)
     
+    //On lance Kraken2 pour l'idenfication des reads
+    kraken2(clean_reads, params.threads)
+
     //On execute l'assemblage
     spades(clean_reads, params.threads, params.memory)
     spades.out.results.view()
@@ -35,7 +38,11 @@ workflow {
     fastqc_raw_output = fastqc_raw.out
     fastp_output = fastp.out.reports
     fastqc_clean_output = fastqc_clean.out
+
+    kraken2_output = kraken2.out
+
     spades_output = spades.out.reports
+    
     amrfinder_output = amrfinder.out
 
 }
@@ -53,6 +60,10 @@ output {
     fastqc_clean_output {
             path { id, html, zip -> "${id}/fastqc_clean"}
         }
+
+    kraken2_output {
+        path {id, kraken2_report, kraken2_output -> "${id}/kraken2"}
+    }
 
     spades_output {
         path {id, sapdes_log , warnings_log -> "${id}"}
