@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
+mkdir containers
+
 cd containers
 
 apptainer pull docker://staphb/fastqc:0.12.1
