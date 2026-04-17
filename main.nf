@@ -39,7 +39,7 @@ workflow {
 
     //On execute amrfinder
     amrfinder(spades.out.results, params.threads)
-    mlst(spades.out.results, bracken.out.species_identity, params.threads)
+    mlst(spades.out.results, params.threads)
     virulencefinder(spades.out.results)
 
     publish:

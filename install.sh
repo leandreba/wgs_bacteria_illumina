@@ -10,7 +10,6 @@ cd containers
 apptainer pull docker://staphb/fastqc:0.12.1
 apptainer pull docker://staphb/fastp:1.1.0
 
-apptainer pull docker://staphb/kraken2:2.17.1
 apptainer pull docker://staphb/bracken:3.1
 
 apptainer pull docker://staphb/spades:4.2.0
@@ -37,6 +36,7 @@ cd kraken
 wget -c https://genome-idx.s3.amazonaws.com/kraken/k2_standard_08_GB_20260226.tar.gz
 tar -xvf *.tar.gz
 rm *.tar.gz
+mv * kraken
 
 cd ..
 
