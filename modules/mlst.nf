@@ -10,10 +10,10 @@ process mlst {
     script:
     
     """
-    mlst ${spades}/contigs.fasta --full --threads ${threads} --outfile mlst.report 2> mlst.log 
+    mlst ${spades}/contigs.fasta --full --threads ${threads} --outfile mlst.report
     """
 
     output:
-    tuple val(id), path("*.report"), path("*.log")
+    tuple val(id), path("*.report")
 
 }

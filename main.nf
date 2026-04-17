@@ -9,6 +9,7 @@ include {spades} from './modules/spades.nf'
 
 include {amrfinder} from './modules/amrfinder.nf'
 include {mlst} from './modules/mlst.nf'
+include {virulencefinder} from './modules/virulencefinder.nf'
 
 //la base de notre worklfow on y appelle nos process
 workflow {
@@ -39,6 +40,7 @@ workflow {
     //On execute amrfinder
     amrfinder(spades.out.results, params.threads)
     mlst(spades.out.results, bracken.out.species_identity, params.threads)
+    virulencefinder(spades.out.results)
 
     publish:
     fastqc_raw_output = fastqc_raw.out
@@ -52,7 +54,7 @@ workflow {
     
     amrfinder_output = amrfinder.out
     mlst_output = mlst.out
-
+    virulencefinder_output = virulencefinder.out 
 }
 
 //dire ou ranger les outputs de nos process
@@ -87,5 +89,9 @@ output {
 
     mlst_output {
         path {id, mlst_report -> "${id}/mlst"}
+    }
+
+    virulencefinder_output {
+        path {id, virulencefinder_txt, virulencefinder_tsv -> "${id}/virulencefinder"}
     }
 }  
