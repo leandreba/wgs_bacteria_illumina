@@ -47,13 +47,15 @@ workflow {
     mlst(spades.out.results, params.threads)
     virulencefinder(spades.out.results)
 
-    //on crée le channel avec tous nos résultats
+    //on crée le channel avec tous nos résultats pour multiqc
     ch_multiqc = Channel.empty()
     ch_multiqc = ch_multiqc.mix(fastqc_raw.out.mqc)
     ch_multiqc = ch_multiqc.mix(fastp.out.mqc)
     ch_multiqc = ch_multiqc.mix(fastqc_clean.out.mqc)
     ch_multiqc = ch_multiqc.mix(kraken.out.mqc)
     ch_multiqc = ch_multiqc.mix(bracken.out.mqc)
+    ch_multiqc = ch_multiqc.mix(amrfinder.out.mqc)
+
     ch_multiqc.collect().view()
 
     multiqc(ch_multiqc.collect())
@@ -68,7 +70,7 @@ workflow {
 
     spades_output = spades.out.reports
     
-    amrfinder_output = amrfinder.out
+    amrfinder_output = amrfinder.out.report
     mlst_output = mlst.out
     virulencefinder_output = virulencefinder.out 
 
@@ -102,7 +104,7 @@ output {
     }
 
     amrfinder_output {
-        path {id, amrfound -> "${id}"}
+        path {id, amrfound, mqc-> "${id}"}
     }
 
     mlst_output {
@@ -110,7 +112,7 @@ output {
     }
 
     virulencefinder_output {
-        path {id, virulencefinder_txt, virulencefinder_tsv -> "${id}/virulencefinder"}
+        path {id, virulencefinder_txt, virulencefinder_tsv -> "${id}"}
     }
 
     multiqc_output {
