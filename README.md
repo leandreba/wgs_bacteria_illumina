@@ -1,12 +1,13 @@
 # Mon TFE v1.0.0
 # Introduction
 Ce workflow est destiné à l'analyse de bactéries par séquençage Illumina.
-Son but premier est d'être utilisé dans des cas de santé publique, pouvoir fournir une analyse simple et rapide sur des bactèrie pathogènes et pouvoir vite prendre des mesures contre de potentiels épidémies. Le workflow permet l'identification des bactèries de ses gènes de résistances et de virulences, ainsi que son sequence type. 
+Son but premier est d'être utilisé dans des cas de santé publique, pouvoir fournir une analyse simple et rapide sur des bactèries pathogènes et pouvoir rapidement prendre des mesures contre de potentiels épidémies. Le workflow permet l'identification des bactèries de ses gènes de résistances et de virulences, ainsi que son sequence type. 
 
 ## Programmes fonctionnels dans cette verion du workflow
 - [x] Fastqc (0.12.1)
 - [x] Fastp (1.1.0)
-- [x] Kraken2 (+ Bracken ?)
+- [x] Kraken2 (2.17.1)
+- [x] Bracken (3.1)
 - [x] Spades (4.2.0)
 - [x] AMRFinder+ (4.2.7)
 - [x] Virulencefinder (3.2.0)
@@ -43,11 +44,14 @@ cd chemin_du_dossier_téléchargé
 ./install.sh
 ```
 
-Vous pouvez églament attribuer le nombre de coeurs et de memoire vive à attribué au workflow dans le fichier `nextflow.config` :
+## Attribuer le nombre de `threads` et de `memory`
+Vous pouvez églament attribuer le nombre de coeurs et de memoire vive pour les programmes du workflow dans le fichier `nextflow.config` :
 
 ```
 nano nextflow.config
 ```
+
+Et il faut changer les valeurs suivantes :
 
 ```
 params {
