@@ -33,7 +33,6 @@ workflow {
     
     //On lance Kraken2 pour l'idenfication des reads
     kraken(clean_reads, params.threads)
-    kraken.out.reports.view()
     bracken(kraken.out.reports)
 
     //On execute l'assemblage
