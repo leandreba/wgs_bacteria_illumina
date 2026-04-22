@@ -1,11 +1,8 @@
 #!/usr/bin/bash
 
-<<<<<<< HEAD
-=======
 #####################################################################################
-#Création du dossier containers et db, télécharmgement et extraction des images.
+#Création du dossier containers, télécharmgement et extraction des images.
 #####################################################################################
->>>>>>> dev
 mkdir containers
 
 cd containers
@@ -21,10 +18,11 @@ apptainer pull docker://staphb/ncbi-amrfinderplus:4.2.7-2026-03-24.1
 apptainer pull docker://staphb/mlst:2.32.2
 apptainer pull docker://genomicepidemiology/virulencefinder:3.2.0
 
-apptainer pull docker://staphb/bakta:1.12.0
+apptainer pull docker://multiqc/multiqc:v1.33
 
 
-cd..
+
+cd ..
 
 #####################################################################################
 #Création du dossier qui stocke les databases et téléchargement/installation des DB.
@@ -40,11 +38,5 @@ wget -c https://genome-idx.s3.amazonaws.com/kraken/k2_standard_08_GB_20260226.ta
 tar -xvf *.tar.gz
 rm *.tar.gz
 mv * kraken
-
-cd ..
-
-#Bakta
-#apptainer exec --bind .:/mnt bakta_1.12.0.sif bakta_db download --output /mnt --type light
-#mv db/ bakta
 
 cd ..
