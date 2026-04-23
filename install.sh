@@ -20,8 +20,6 @@ apptainer pull docker://genomicepidemiology/virulencefinder:3.2.0
 
 apptainer pull docker://multiqc/multiqc:v1.33
 
-
-
 cd ..
 
 #####################################################################################
@@ -31,9 +29,6 @@ mkdir db
 cd db
 
 #Kraken2
-mkdir kraken
-cd kraken
-
 wget -c https://genome-idx.s3.amazonaws.com/kraken/k2_standard_08_GB_20260226.tar.gz
 tar -xvf *.tar.gz
 rm *.tar.gz
